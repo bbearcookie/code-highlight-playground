@@ -1,5 +1,8 @@
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atelierSeasideDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+'use client';
+
+import { useEffect } from 'react';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-typescript.min';
 
 const codeString = `
 interface Todo {
@@ -17,12 +20,16 @@ const todo: TodoPreview = {
 `;
 
 export default function Page() {
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
+
   return (
     <div>
       <h1>하이</h1>
-      <SyntaxHighlighter language="typescript" style={atelierSeasideDark}>
-        {codeString.trim()}
-      </SyntaxHighlighter>
+      <pre>
+        <code className={`language-ts`}>{codeString.trim()}</code>
+      </pre>
     </div>
   );
 }
